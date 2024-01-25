@@ -1,0 +1,1 @@
+Gets reads with primers and indexes plus set of NNNNN and combines them making sure they have the correct primer and limit to number of NNNN
