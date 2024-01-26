@@ -54,17 +54,17 @@ These sequences can only contain standard bases: A, C, G or T.
 |Sequence|Comment|
 |-|-|
 |1)||
-|``ATGGGGACTCGTGTGGATTGCGCTGTTATCCCTAGGGTA``| Start of read with forward primer|
+|``ATGGGGACTCGTGTGGATTGCGCTGTTATCCCTAGGGTA``| Start of read with forward primer and 6 N's|
 |``--------------GGATTGCGCTGTTATCC``|Target primer sequence which is 14 to 17 bp from start|
 |``------ACTCGTGT``|Index sequence which before the target sequence|
 |``NNNNNN``|Unique id and stagger to create difference offset to aid base calling|
 |2)||
-|``ATTCGTACACTAAGAGACGAGAAGACCCTATGGAGCTTT``|Start of read with reverse prime|
+|``ATTCGTACACTAAGAGACGAGAAGACCCTATGGAGCTTT``|Start of read with reverse primer and 6 N's|
 |``--------------AGACGAGAAGACCCTAT``||
 |``------ACACTAAG``||
 |``NNNNNN``||
 |3)||
-|``TTCAGTCCAATTAACGGATTGCGCTGTTATCCCTAGGGT``|Start of read with forward primer with 7Ns|
+|``TTCAGTCCAATTAACGGATTGCGCTGTTATCCCTAGGGT``|Start of read with forward primer and 7 Ns|
 |``---------------GGATTGCGCTGTTATCC``||
 |``-------CAATTAAC``||
 |``NNNNNNN``||
