@@ -10,14 +10,18 @@ Any errors in the compiling will be saved to the errors.txt file. If this file h
 
 ## Command line arguments
 
-Parameter on command line:  
-Read one filename with path,  
-Read two filename with path,  
-Primer file with path,  
-Index file with path,  
-Path to folder to save data in,  
-Minimum PCR length,  
-Maximum PCR length.   
+> Deconvolute_staggered.exe Read1.fastq.gz Read2.fastq.gz primers.txt indexes.txt results_Folder 190 350
+
+Parameters on command line: 
+|Parameter|Example|Comment|
+|-|-|-|
+|Read one filename with path |read1.fastq.gz|File name and path|  
+|Read two filename with path |read2.fastq.gz|File name and path| 
+|Primer file with path |primers.txt|File name and path|
+|Index file with path |indexes.txt|File name and path|
+|Path to folder to save data in |results_Folder|Path to export folder: this most exist before start of analysis|
+|Minimum PCR length |190|Any value above 50 and less than the expected amplicon size (Do not be overly stringent with this value)| 
+|Maximum PCR length |350|Any value above 50 and greater than the expected amplicon size (Do not be overly stringent with this value)|   
 
 ### Example primer file
 GGATTGCGCTGTTATCC  
