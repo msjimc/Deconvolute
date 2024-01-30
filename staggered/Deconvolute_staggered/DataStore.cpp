@@ -24,8 +24,7 @@ void DataStore::SetFileName(string FileName)
 bool DataStore::SaveData(string Data)
 {
 	bool answer = true;
-	count++;
-
+	count++; 
 	UnsavedData.push_back(Data);
 	if (UnsavedData.size() > 999)
 	{
@@ -55,7 +54,7 @@ void DataStore::SaveDataToFile()
 			{
 				string line(*it);
 				char* outR1 = (char*)line.c_str();
-				outStream.write(outR1, strlen(outR1));			
+				outStream.write(outR1, strlen(outR1));
 			}
 			catch(exception ex)
 			{ }

@@ -1,8 +1,8 @@
 // Deconvolute.cpp : Defines the entry point for the console application.
 //
-#include <boost/iostreams/filter/gzip.hpp>
+//#include <boost/iostreams/filter/gzip.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include <boost/iostreams/filter/zlib.hpp>
+//#include <boost/iostreams/filter/zlib.hpp>
 #include <fstream>
 #include <vector>
 #include "dirent.h"

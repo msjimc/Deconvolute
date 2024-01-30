@@ -22,13 +22,12 @@ Engine::Engine(vector<string> arguments)
 	InsertsSaved = 0;
 
 	NoConsole = true;
-	cout << "Shortest PCR product" <<  arguments[5] << " bp\nLongest PCR product " << arguments[6] << " bp\n";
-	stringstream ss;
-	ss << arguments[5];	
-	ss >> MinimumProductLength;// = 160;	
+	stringstream ss1, ss2;
+	ss1 << arguments[5];	
+	ss1 >> MinimumProductLength;// = 160;	
 	
-	ss << arguments[6];
-	ss >> MaximumProductLength;// = 350;
+	ss2 << arguments[6];
+	ss2 >> MaximumProductLength;// = 350;
 	MinimumLength = 50;
 	MinimumQuality = 20;
 	R1Adaptor = "GATCGGAAGAG";
@@ -128,6 +127,7 @@ void Engine::AnalyseData()
 					{
 						InsertsPassedTrimming++;
 						data = FindHomology(data[0], data[1], data[3], data[5], data[7]);//data size is now 4
+						
 						if (data.size() == 4 && data[1].length() >= MinimumProductLength && data[1].length() <= MaximumProductLength)
 						{
 							InsertsLongerThanMinimum++;
