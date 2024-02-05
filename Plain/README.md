@@ -60,7 +60,7 @@ The Sequence is PCR amplified with the primers of interest and the product clean
 |1)|Forward sequence|
 |``GGGACTCGTGTGGATTGCGCTGTTATCCCTAGGGTA``| Start of read with forward primer|
 |``-----------GGATTGCGCTGTTATCC``|Target primer sequence which is 14 to 17 bp from start|
-|``----ACTCGTGT``|Index sequence which before the target sequence|
+|``----ACTCGTGT``|Index sequence which is before the target sequence|
 |``NNNN``|Unique id and stagger to create difference offset to aid base calling|
 |2)|Reverse complement|
 |``ATTCGTACACTAAGAGACGAGAAGACCCTATGGAGCTTT``|Start of read with reverse prime|
