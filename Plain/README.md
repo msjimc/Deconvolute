@@ -24,6 +24,7 @@ CGTGCCAGCCACCGCG
 GGGTATCTAATCCYAGTTTG   
 
 These sequences can contain degenerate bases: S, W, R or Y.
+#### Make sure the files have Unix line ends for use on Linux
 
 ### Example index file
 AACTGTAG  
@@ -48,6 +49,7 @@ TTCCTGTT
 TTGCCTAG  
 
 These sequences can only contain standard bases: A, C, G or T.
+#### Make sure the files have Unix line ends for use on Linux
 
 ## Library production
 
