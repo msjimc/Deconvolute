@@ -4,7 +4,6 @@
 #include <boost/iostreams/filter/zlib.hpp>
 #include <fstream>
 #include <vector>
-#include "dirent.h"
 #include <string>
 #include <iostream>
 
