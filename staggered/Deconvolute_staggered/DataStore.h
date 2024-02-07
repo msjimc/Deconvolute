@@ -1,10 +1,11 @@
 #pragma once
+
 #include <boost/iostreams/filter/gzip.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/filter/zlib.hpp>
 #include <fstream>
 #include <vector>
-#include <dirent.h>
+//#include "dirent.h"
 #include <string>
 #include <iostream>
 

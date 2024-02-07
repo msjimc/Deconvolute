@@ -2,9 +2,9 @@
 #include <sstream>
 #include <iterator>
 #include <algorithm>
-#include <boost/iostreams/filter/gzip.hpp>
+//#include <boost/iostreams/filter/gzip.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include <boost/iostreams/filter/zlib.hpp>
+//#include <boost/iostreams/filter/zlib.hpp>
 #include <boost/algorithm/string.hpp>
 #include <fstream>
 #include <vector>
@@ -18,7 +18,7 @@ class Engine
 {
 private:
 	//aray of file objects
-	DataStore * DataStores;
+	DataStore* DataStores;
 
 	//readcounts
 	int InsertsRead;
@@ -27,7 +27,7 @@ private:
 	int InsertsPassedTrimming;
 	int InsertsLongerThanMinimum;
 	int InsertsSaved;
-	
+
 	//cutoff and arguments
 	int MinimumProductLength;
 	int MinimumLength;
@@ -66,15 +66,15 @@ private:
 
 	//trim the data files
 	bool testNames(string First, string Second);
-	bool TrimQuality(string & Read, string & Quality, int minimumQuality);
-	bool TrimAdaptor(string &Read, string &Quality, string Adaptor);
+	bool TrimQuality(string& Read, string& Quality, int minimumQuality);
+	bool TrimAdaptor(string& Read, string& Quality, string Adaptor);
 
 	//generic  matching functions
 	bool InString(std::string First, std::string Second);
 	bool InString(std::string First, std::string Second, float PercentMatch);
 	bool InString_Wobble(std::string First, std::string Wobble, float PercentMatch);
 	bool Match(char First, char wobble);
-	
+
 	//Get primer and index sequences in reads
 	vector<string> PrimerIndexRead(vector<string>& Data, int line, bool trim);
 	/*vector<string> PrimerIndexRead1(vector<string> Data);

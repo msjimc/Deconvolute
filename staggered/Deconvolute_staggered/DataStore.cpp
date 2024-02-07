@@ -14,7 +14,7 @@ DataStore::DataStore(string FileName)
 	}
 
 void DataStore::SetFileName(string FileName)
-{ 
+{
 	count = 0;
 	fileName = FileName;
 	saveFile.exceptions(std::ios::failbit | std::ios::badbit);
@@ -24,7 +24,8 @@ void DataStore::SetFileName(string FileName)
 bool DataStore::SaveData(string Data)
 {
 	bool answer = true;
-	count++; 
+	count++;
+
 	UnsavedData.push_back(Data);
 	if (UnsavedData.size() > 999)
 	{
@@ -54,10 +55,13 @@ void DataStore::SaveDataToFile()
 			{
 				string line(*it);
 				char* outR1 = (char*)line.c_str();
-				outStream.write(outR1, strlen(outR1));
+				outStream.write(outR1, strlen(outR1));		
+				//outStream.reset();
 			}
 			catch(exception ex)
-			{ }
+			{ 
+				cout << "error\n"; 
+			}
 		}		
 	}
 }
@@ -78,6 +82,7 @@ void DataStore::SaveDataToFile(string line)
 void DataStore::CloseFile()
 {
 	SaveDataToFile(); 
+	saveFile.flush();
 	saveFile.close();
 	cout << fileName << ":\t" << count << "\n";
 }

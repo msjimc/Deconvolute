@@ -1,4 +1,4 @@
-#include "Engine.h"
+ #include "Engine.h"
 
 Engine::~Engine()
 {
@@ -22,12 +22,15 @@ Engine::Engine(vector<string> arguments)
 	InsertsSaved = 0;
 
 	NoConsole = true;
-	stringstream ss1, ss2;
-	ss1 << arguments[5];	
-	ss1 >> MinimumProductLength;// = 160;	
 	
+	stringstream ss1,ss2;
+	ss1 << arguments[5];
+	ss1 >> MinimumProductLength;// = 160;	
+
 	ss2 << arguments[6];
 	ss2 >> MaximumProductLength;// = 350;
+	cout << "Shortest PCR product "<<  MinimumProductLength << " bp\nLongest PCR product " << MaximumProductLength << " bp\n";
+
 	MinimumLength = 50;
 	MinimumQuality = 20;
 	R1Adaptor = "GATCGGAAGAG";
@@ -36,7 +39,7 @@ Engine::Engine(vector<string> arguments)
 	barcodes = GetIndexes(arguments[3]);
 	baseFolder = arguments[4];
 	DataFileNames = arguments;
-	
+
 
 }
 
@@ -44,13 +47,13 @@ void Engine::CloseFiles()
 {
 	try
 	{
-		if (fileR1) 
-		{ 
-			fileR1.close(); 
+		if (fileR1)
+		{
+			fileR1.close();
 			decompressorR1.reset();
 		}
-		if (fileR2) 
-		{ 
+		if (fileR2)
+		{
 			fileR2.close();
 			decompressorR2.reset();
 		}
@@ -92,7 +95,7 @@ void Engine::AnalyseData()
 		InsertsRead++;
 		if (testNames(data[0], data[4]) == true)
 		{
- 			vector<string> indexR1 = PrimerIndexRead(data, 1, true);
+			vector<string> indexR1 = PrimerIndexRead(data, 1, true);
 			vector<string> indexR2 = PrimerIndexRead(data, 5, true);
 			bool keepgoing = true;
 
@@ -101,14 +104,18 @@ void Engine::AnalyseData()
 				InsertsWithPrimersAndIndexs++;
 				string key;
 				if (indexR1[2].compare("T") == 0)
-				{ key = indexR1[1] + "-" + indexR2[1]; }
+				{
+					key = indexR1[1] + "-" + indexR2[1];
+				}
 				else
-				{ key = indexR2[1] + "-" + indexR1[1]; }
+				{
+					key = indexR2[1] + "-" + indexR1[1];
+				}
 
 				if (find(AcceptedCombinations.begin(), AcceptedCombinations.end(), key) != AcceptedCombinations.end())
 				{
 					InsertsCommon++;
-					
+
 					keepgoing = TrimQuality(data[1], data[3], MinimumQuality + 32);
 					if (keepgoing == true)
 					{
@@ -127,7 +134,6 @@ void Engine::AnalyseData()
 					{
 						InsertsPassedTrimming++;
 						data = FindHomology(data[0], data[1], data[3], data[5], data[7]);//data size is now 4
-						
 						if (data.size() == 4 && data[1].length() >= MinimumProductLength && data[1].length() <= MaximumProductLength)
 						{
 							InsertsLongerThanMinimum++;
@@ -183,9 +189,13 @@ map<string, int> Engine::GetCommonBarcodes()
 		{
 			string key;
 			if (indexR1[2].compare("T") == 0)
-			{ key = indexR1[1] + "-" + indexR2[1]; }
+			{
+				key = indexR1[1] + "-" + indexR2[1];
+			}
 			else
-			{ key = indexR2[1] + "-" + indexR1[1]; }
+			{
+				key = indexR2[1] + "-" + indexR1[1];
+			}
 
 			map<string, int>::iterator it = combinations.find(key);
 			if (it == combinations.end())
@@ -295,7 +305,7 @@ bool Engine::testNames(string First, string Second)
 
 }
 
-bool Engine::TrimQuality(string & Read, string & Quality, int minimumQuality)
+bool Engine::TrimQuality(string& Read, string& Quality, int minimumQuality)
 {
 	size_t len = Quality.length();
 	int comparison = 0;
@@ -336,7 +346,7 @@ bool Engine::TrimQuality(string & Read, string & Quality, int minimumQuality)
 	}
 }
 
-bool Engine::TrimAdaptor(string & Read, string & Quality, string Adaptor)
+bool Engine::TrimAdaptor(string& Read, string& Quality, string Adaptor)
 {
 	size_t Adaptor_Len = Adaptor.length();
 	size_t Read_Len = Read.length();
@@ -460,7 +470,7 @@ bool Engine::InString_Wobble(std::string First, std::string Wobble, float Percen
 	float percent = (float)score;
 	float minimum = (float)len * PercentMatch;
 	if (minimum < percent)
-	{		
+	{
 		return true;
 	}
 	else
@@ -617,18 +627,22 @@ vector<string> Engine::PrimerIndexRead(vector<string>& data, int line, bool trim
 					int stagger = index - 14;
 					data[line] = data[line].substr(stagger, data[line].length() - stagger);
 					data[line + 2] = data[line + 2].substr(stagger, data[line + 2].length() - stagger);
-				}				
+				}
 				if (first == true)
-				{ answer.push_back("T"); }
+				{
+					answer.push_back("T");
+				}
 				else
-				{ answer.push_back("F"); }
+				{
+					answer.push_back("F");
+				}
 
 				return answer;
 			}
 		}
 		first = !first;
 	}
-	
+
 	return answer;
 }
 
@@ -707,7 +721,7 @@ std::vector<string> Engine::Combine(std::string name, std::string R1, std::strin
 
 	string temp1 = "";
 	string temp2 = "";
-	
+
 	if (startPoint - Offset < 0)
 	{
 		int diff = startPoint - Offset;
@@ -732,7 +746,7 @@ std::vector<string> Engine::Combine(std::string name, std::string R1, std::strin
 					Sequence += R2[index];
 					Quality += Q2[index];
 				}
-				else if ((int)Q1[startPoint + index] >(int)(Q2[index]))
+				else if ((int)Q1[startPoint + index] > (int)(Q2[index]))
 				{
 					temp1 += R1[startPoint + index];
 					temp2 += R2[index];
@@ -752,7 +766,7 @@ std::vector<string> Engine::Combine(std::string name, std::string R1, std::strin
 				index++;
 			}
 		}
-		
+
 		if (index < R2.length())
 		{
 			Sequence += R2.substr(index);
