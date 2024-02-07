@@ -22,13 +22,13 @@ Engine::Engine(vector<string> arguments)
 	InsertsSaved = 0;
 
 	NoConsole = true;
-	cout << "Shortest PCR product" <<  arguments[5] << " bp\nLongest PCR product " << arguments[6] << " bp\n";
-	stringstream ss;
-	ss << arguments[5];	
-	ss >> MinimumProductLength;// = 160;	
-	
-	ss << arguments[6];
-	ss >> MaximumProductLength;// = 350;
+	cout << "Shortest PCR product" << arguments[5] << " bp\nLongest PCR product " << arguments[6] << " bp\n";
+	stringstream ss1, ss2;
+	ss1 << arguments[5];
+	ss1 >> MinimumProductLength;// = 160;	
+
+	ss2 << arguments[6];
+	ss2 >> MaximumProductLength;// = 350;
 	MinimumLength = 50;
 	MinimumQuality = 20;
 	R1Adaptor = "GATCGGAAGAG";
@@ -46,17 +46,17 @@ void Engine::CloseFiles()
 {
 	try
 	{
-		if (fileR1) 
-		{ 
-			fileR1.close(); 
+		if (fileR1)
+		{
+			fileR1.close();
 			decompressorR1.reset();
 		}
-		if (fileR2) 
-		{ 
+		if (fileR2)
+		{
 			fileR2.close();
 			decompressorR2.reset();
 		}
-	}	
+	}
 	catch (exception ex)
 	{
 	}
@@ -85,7 +85,7 @@ void Engine::AnalyseData()
 	OtherPrimer = GetReversePrimerSet();
 
 	OpenFiles(DataFileNames);
-	
+
 	vector<string> data = NextReadPair();
 	int counter = 1;
 
@@ -175,24 +175,29 @@ map<string, int> Engine::GetCommonBarcodes()
 		vector<string> indexR2 = PrimerIndexRead2(data);
 
 		if (indexR1.size() == 2 && indexR2.size() == 2)
-		{	string key = indexR1[1] + "-" + indexR2[1];
+		{
+			string key = indexR1[1] + "-" + indexR2[1];
 			if (IsRevesred(data) == true)
-			{ key = indexR1[1] + "-" + indexR2[1]; }
+			{
+				key = indexR1[1] + "-" + indexR2[1];
+			}
 			else
-			{ key = indexR2[1] + "-" + indexR1[1]; }
-				
-				map<string, int>::iterator it = combinations.find(key);
-				if (it == combinations.end())
+			{
+				key = indexR2[1] + "-" + indexR1[1];
+			}
+
+			map<string, int>::iterator it = combinations.find(key);
+			if (it == combinations.end())
+			{
+				if (find(barcodes.begin(), barcodes.end(), indexR1[1]) != barcodes.end() && find(barcodes.begin(), barcodes.end(), indexR2[1]) != barcodes.end())
 				{
-					if (find(barcodes.begin(), barcodes.end(), indexR1[1]) != barcodes.end() && find(barcodes.begin(), barcodes.end(), indexR2[1]) != barcodes.end())
-					{
-						combinations.insert(pair<string, int>(key, 1));
-					}
+					combinations.insert(pair<string, int>(key, 1));
 				}
-				else
-				{
-					it->second++;
-				}					
+			}
+			else
+			{
+				it->second++;
+			}
 		}
 
 		data = NextReadPair();
@@ -289,7 +294,7 @@ bool Engine::testNames(string First, string Second)
 
 }
 
-bool Engine::TrimQuality(string & Read, string & Quality, int minimumQuality)
+bool Engine::TrimQuality(string& Read, string& Quality, int minimumQuality)
 {
 	size_t len = Quality.length();
 	int comparison = 0;
@@ -330,7 +335,7 @@ bool Engine::TrimQuality(string & Read, string & Quality, int minimumQuality)
 	}
 }
 
-bool Engine::TrimAdaptor(string & Read, string & Quality, string Adaptor)
+bool Engine::TrimAdaptor(string& Read, string& Quality, string Adaptor)
 {
 	size_t Adaptor_Len = Adaptor.length();
 	size_t Read_Len = Read.length();
@@ -683,7 +688,7 @@ std::vector<string> Engine::Combine(std::string name, std::string R1, std::strin
 					Sequence += R2[index];
 					Quality += Q2[index];
 				}
-				else if ((int)Q1[startPoint + index] >(int)(Q2[index]))
+				else if ((int)Q1[startPoint + index] > (int)(Q2[index]))
 				{
 					temp1 += R1[startPoint + index];
 					temp2 += R2[index];
@@ -708,7 +713,7 @@ std::vector<string> Engine::Combine(std::string name, std::string R1, std::strin
 		if (index < R2.length())
 		{
 			Sequence += R2.substr(index);
-			Quality += Q2.substr(index );
+			Quality += Q2.substr(index);
 		}
 		//if (index + 10 < R2.length())
 		//{
@@ -807,7 +812,9 @@ void Engine::SaveTheData(vector<string> data, string key, string FirstPrimer, st
 	{
 		string f = "@" + data[1].substr(0, 4) + "-" + data[1].substr(data[1].length() - 4, 4);
 		if (data[2].length() != data[3].length())
-		{cout << f + ";" + FirstPrimer + ";" + SecondPrimer + ";" + "\n" + data[1] + "\n" + data[2] + "\n" + data[3] + "\n"; }
+		{
+			cout << f + ";" + FirstPrimer + ";" + SecondPrimer + ";" + "\n" + data[1] + "\n" + data[2] + "\n" + data[3] + "\n";
+		}
 		DataStores[it->second].SaveData(f + ";" + FirstPrimer + ";" + SecondPrimer + ";" + "\n" + data[1] + "\n" + data[2] + "\n" + data[3] + "\n");
 
 		InsertsSaved++;

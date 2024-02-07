@@ -18,7 +18,7 @@ private:
 	void SaveDataToFile();
 
 	std::ofstream saveFile;
-	
+
 public:
 	DataStore() {};
 	~DataStore();
