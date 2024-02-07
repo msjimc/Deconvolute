@@ -4,7 +4,7 @@
 This program requires the C++ Boost libraries to be installed on the server.  
 Compiling with g++ (all on one line)
 
-> g++ Deconvoluted.cpp Engine.cpp DataStore.cpp -I \<path to boost installation\> -L \<path to boost libraries\> -lboost_iostreams -o Deconvolute.exe 2> errors.txt
+> g++ Deconvoluted_plain.cpp Engine.cpp DataStore.cpp -I \<path to boost installation\> -L \<path to boost libraries\> -lboost_iostreams -o Deconvolute.exe 2> errors.txt
 
 Any errors in the compiling will be saved to the errors.txt file. If this file has zero size the build as worked. If not look in the file and resolve the first error and then rebuild until it works.
 
