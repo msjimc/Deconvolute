@@ -28,6 +28,44 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
+	std::ifstream input1(argv[1]);
+	if (!input1)
+	{
+		std::perror(argv[1]);
+		std::cerr << "Can not open the 'Read 1 file'\n";
+		return EXIT_FAILURE;
+	}
+	input1.close();
+
+	std::ifstream input2(argv[2]);
+	if (!input2)
+	{
+		std::perror(argv[2]);
+		std::cerr << "Can not open the 'Read 2 file'\n";
+		return EXIT_FAILURE;
+	}
+	input2.close();
+
+	std::ifstream input3(argv[3]);
+	if (!input3)
+	{
+		std::perror(argv[3]);
+		std::cerr << "Can not open the 'primer file'\n";
+		return EXIT_FAILURE;
+	}
+	input3.close();
+
+	std::ifstream input4(argv[4]);
+	if (!input4)
+	{
+		std::perror(argv[4]);
+		std::cerr << "Can not open the 'index file'\n";
+		return EXIT_FAILURE;
+	}
+	input4.close();
+
+
+
 	for (int index = 1; index < argc; index++)
 	{
 		arguments.push_back(argv[index]);
